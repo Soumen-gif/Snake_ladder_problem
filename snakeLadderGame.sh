@@ -31,6 +31,14 @@ do
 	then
 		hisPosition=0
 	fi
-	echo Your position is:$hisPosition
+if [ $hisPosition -eq 100 ]
+	then
+		echo "his  position is 100 and he won the game"
+		exit
+	fi
+	if [ $hisPosition -gt 100 ]
+	then
+	 hisPosition=$(($hisPosition - $dieRoll))
+	fi
+	echo his position is:$hisPosition
 done
-echo "he has won the game...."
