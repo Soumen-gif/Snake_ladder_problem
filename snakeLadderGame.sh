@@ -24,5 +24,13 @@ dice()
         echo "he got ..$dieRoll"
 	option
 }
-dice
-echo now his  position is $hisPosition
+while [ $hisPosition -le 100 ]
+do
+	dice
+	if [ $hisPosition -lt 0 ]
+	then
+		hisPosition=0
+	fi
+	echo Your position is:$hisPosition
+done
+echo "he has won the game...."
