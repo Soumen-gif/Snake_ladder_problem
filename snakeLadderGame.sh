@@ -1,49 +1,61 @@
 echo "welcome to snake ladder game"
 startPosition=0
 finishPosition=100
-countdice=1
-declare -A play
 hisPosition=0
-option(){
+player1position=0
+player2position=0
+die(){
+	dieRoll=$((RANDOM % 6 + 1))
+        echo "he got......... : $dieRoll"
 	choice=$((RANDOM % 3))
-	echo "he got ....$choice"
 	if [ $choice -eq 2 ]
 	then
-		echo "Ladder"
+		echo "he got Ladder"
 		hisPosition=$(($hisPosition + $dieRoll))
+		checkCondition
+		die
 	elif [ $choice -eq 1 ]
 	then
-		echo "Snake"
+		echo "he got Snake"
 		hisPosition=$(($hisPosition - $dieRoll))
 	else
 		echo "No play"
 	fi
 }
-dice()
-{
-        dieRoll=$((RANDOM % 6 + 1))
-        echo "he got ..$dieRoll"
-	option
-}
-while [ $hisPosition -le 100 ]
-do
-   echo "no of times he throw the dice is...$countdice"
-	dice
+checkCondition(){
 	if [ $hisPosition -lt 0 ]
 	then
 		hisPosition=0
 	fi
-if [ $hisPosition -eq 100 ]
+	if [ $hisPosition -eq 100 ]
 	then
-     play[$countdice]=100
-		echo "his  position is 100 and he won the game"
+		echo "his position is 100 and $player won the game.."
 		exit
 	fi
 	if [ $hisPosition -gt 100 ]
 	then
-	 hisPosition=$(($hisPosition - $dieRoll))
+		hisPosition=$(($hisPosition - $dieRoll))
 	fi
-   play[$countdice]=$hisPosition
-	echo his position is:$hisPosition
-   countdice=$((countdice + 1))
-done
+	echo Your position is:$hisPosition
+}
+playGame(){
+	while [ $hisPosition -ne 100 ]
+	do
+		echo "This is the player $player....."
+		if [ $player -eq 1 ]
+		then
+			hisPosition=$player1position
+			die
+			checkCondition
+			player1position=$hisPosition
+			player=2
+		else
+			hisPosition=$player2position
+			die
+			checkCondition
+			player2position=$hisPosition
+			player=1
+		fi
+	done
+}
+playGame
