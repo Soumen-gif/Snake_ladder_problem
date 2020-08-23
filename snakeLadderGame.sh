@@ -39,7 +39,7 @@ checkCondition(){
 	echo Your position is:$hisPosition
 }
 playGame(){
-	while [ $hisPosition -ne 100 ]
+	while [ $hisPosition -ne 101 ]
 	do
 		echo "This is the player $player....."
 		if [ $player -eq 1 ]
@@ -48,13 +48,13 @@ playGame(){
 			dice
 			checkCondition
 			player1position=$hisPosition
-			player=2
+			player=1
 		else
 			hisPosition=$player2position
 			dice
 			checkCondition
 			player2position=$hisPosition
-			player=1
+			player=2
 		fi
 	done
 }
