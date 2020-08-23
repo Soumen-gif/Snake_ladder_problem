@@ -4,7 +4,7 @@ finishPosition=100
 hisPosition=0
 player1position=0
 player2position=0
-die(){
+dice(){
 	dieRoll=$((RANDOM % 6 + 1))
         echo "he got......... : $dieRoll"
 	choice=$((RANDOM % 3))
@@ -13,7 +13,7 @@ die(){
 		echo "he got Ladder"
 		hisPosition=$(($hisPosition + $dieRoll))
 		checkCondition
-		die
+		dice
 	elif [ $choice -eq 1 ]
 	then
 		echo "he got Snake"
@@ -45,13 +45,13 @@ playGame(){
 		if [ $player -eq 1 ]
 		then
 			hisPosition=$player1position
-			die
+			dice
 			checkCondition
 			player1position=$hisPosition
 			player=2
 		else
 			hisPosition=$player2position
-			die
+			dice
 			checkCondition
 			player2position=$hisPosition
 			player=1
